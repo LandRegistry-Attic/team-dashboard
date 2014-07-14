@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/whereabouts.css">
+</head>
+<body>
+  <table>
+    <tr>
+  {% for place in places %}
+     <th>{{ place }}</th>
+  {% endfor %}
+    </tr>
+    <tr>
+  {% for place, people in places.iteritems() %}
+    <td>
+    {% for name in people %}
+        <div id="card_{{ members[name].photo }}" class="card">
+          <img src="photos/{{ members[name].photo }}.jpg">
+          <h2>{{ name|first_name}}</h2>
+        </div>
+    {% endfor %}
+    </td>
+  {% endfor %}
+    </tr>
+  </table>
+</body>
+</html>

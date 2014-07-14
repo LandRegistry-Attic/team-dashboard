@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <link rel="stylesheet" href="/static/card.css">
+</head>
+<body>
+  {% for row in members | batch(4) %}
+  <div class="page">
+      {% for name in row %}
+    <div class="card">
+      <h2>{{ name }}</h2>
+      <img src="photos/{{ members[name].photo }}.jpg">
+      <ul>
+        <li class="title">{{ members[name].role }}</li>
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+  {% endfor %}
+</body>
+</html>
