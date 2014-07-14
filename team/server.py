@@ -4,8 +4,8 @@ from team import app
 from members import Members
 from whereabouts import Whereabouts
 
-members = Members().load("../team-data/data/team.tsv")
-whereabouts = Whereabouts().load("../team-data/data/whereabouts.tsv")
+members = Members().load("../team-data/team.tsv")
+whereabouts = Whereabouts().load("../team-data/whereabouts.tsv")
 
 @app.route('/')
 def home():
@@ -22,5 +22,5 @@ def _whereabouts():
 
 @app.route('/photos/<path>')
 def _photo(path):
-    return send_file("../../team-data/data/photos/" + path, mimetype='image/jpeg')
+    return send_file("../../team-data/photos/" + path, mimetype='image/jpeg')
 
