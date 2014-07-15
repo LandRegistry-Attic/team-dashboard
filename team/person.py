@@ -5,6 +5,7 @@ import csv
 class Person(object):
     name = ""
     photo = ""
+    photo_url = ""
     slack = ""
     twitter = ""
     github = ""

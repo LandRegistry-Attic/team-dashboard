@@ -14,6 +14,9 @@ class Members:
         r = csv.DictReader(lines, delimiter='\t')
         for row in r:
             person = Person(row)
+            template = os.environ.get('PHOTO_URL_TEMPLATE')
+            if template:
+                person.photo_url = str.replace(os.environ.get('PHOTO_URL_TEMPLATE'), '%NAME%', person.photo)
             self.add(person)
         return self
 
