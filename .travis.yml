@@ -1,0 +1,17 @@
+language: python
+python:
+- '2.7'
+install:
+- pip install -r requirements.txt
+- pip install pytest
+script: py.test
+deploy:
+  provider: heroku
+  buildpack: python
+  api_key:
+    secure: SVOkDnBfcAr/Ok+LhW5msYsLD6cSYe+3C4x3A2Wjr8vhJQ1HW17P+fffWlP28LWuTYodrOJleAQ9B0upOypb5PvbfxHh1lEDO+OK1eZbhhp3JO08seDrYd1kv5e9chsXMD0hfxsZUL54czvy+Yb6V5cFOdMu/d2uXutndg+ohh4=
+  strategy: git
+  app: lr-team-dashboard
+  on:
+    repo: LandRegistry/team-dashboard
+    branch: master
