@@ -2,6 +2,7 @@ import os
 import csv
 import re
 from collections import defaultdict
+import urllib2
 
 re_date = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 
@@ -36,5 +37,10 @@ class Whereabouts:
                 self.add(key.strip(), row['name'], row[key])
         return self
 
-    def load(self, filename):
-        return self.parse_tsv(open(filename).read())
+    def load(self, resource):
+        if (resource.startswith('http')):
+            response = urllib2.urlopen(resource)
+            tsv = response.read()
+            return self.parse_tsv(tsv)
+        else:
+            return self.parse_tsv(open(resource).read())

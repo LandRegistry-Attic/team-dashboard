@@ -1,12 +1,13 @@
 from flask import render_template, send_file
 
 import time
+import os
 from team import app
 from members import Members
 from whereabouts import Whereabouts
 
-team = Members().load("../team-data/team.tsv")
-whereabouts = Whereabouts().load("../team-data/whereabouts.tsv")
+team = Members().load(os.environ.get('TEAM_TSV_URL'))
+whereabouts = Whereabouts().load(os.environ.get('WHEREABOUTS_TSV_URL'))
 
 @app.route('/')
 def home():

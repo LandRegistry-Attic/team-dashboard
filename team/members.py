@@ -1,6 +1,7 @@
 import os
 import csv
 from person import Person
+import urllib2
 
 class Members:
     members = {}
@@ -16,5 +17,10 @@ class Members:
             self.add(person)
         return self
 
-    def load(self, filename):
-        return self.parse_tsv(open(filename).read())
+    def load(self, resource):
+        if (resource.startswith('http')):
+            response = urllib2.urlopen(resource)
+            tsv = response.read()
+            return self.parse_tsv(tsv)
+        else:
+            return self.parse_tsv(open(resource).read())
