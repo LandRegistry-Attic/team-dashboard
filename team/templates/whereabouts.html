@@ -16,7 +16,7 @@
     <td>
     {% for name in people %}
         <div id="card_{{ members[name].photo }}" class="card">
-          <img src="photos/{{ members[name].photo }}.jpg">
+          <img src="/photos/{{ members[name].photo }}.jpg">
           <h2>{{ name|first_name}}</h2>
         </div>
     {% endfor %}
