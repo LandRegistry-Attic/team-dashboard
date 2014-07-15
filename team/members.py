@@ -8,10 +8,13 @@ class Members:
     def add(self, person):
         self.members[person.name] = person
 
-    def load(self, filename):
-        with open(filename) as f:
-            r = csv.DictReader(f, delimiter='\t')
-            for row in r:
-                member = Person(row)
-                self.add(member)
+    def parse_tsv(self, string):
+        lines = iter(string.splitlines())
+        r = csv.DictReader(lines, delimiter='\t')
+        for row in r:
+            person = Person(row)
+            self.add(person)
         return self
+
+    def load(self, filename):
+        return self.parse_tsv(open(filename).read())
