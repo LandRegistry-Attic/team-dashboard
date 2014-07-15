@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import os
 import csv
 import re
@@ -16,7 +14,11 @@ class DayPlace(dict):
             return value
 
 class Whereabouts:
-    day_place = DayPlace()
+    def __init__(self):
+        self.reset()
+
+    def reset(self):
+        self.day_place = DayPlace()
 
     def add(self, day, name, place):
         if re_date.match(day) and place:
@@ -25,19 +27,14 @@ class Whereabouts:
     def places(self, day):
         return self.day_place[day]
 
-    def load(self, filename):
-        self.by_day = {}
-        with open(filename) as f:
-            next(f)
-            r = csv.DictReader(f, delimiter='\t')
-            for row in r:
-                for key in row:
-                    self.add(key.strip(), row['name'], row[key])
+    def parse_tsv(self, string):
+        lines = iter(string.splitlines())
+        next(lines)
+        r = csv.DictReader(lines, delimiter='\t')
+        for row in r:
+            for key in row:
+                self.add(key.strip(), row['name'], row[key])
         return self
 
-if __name__ == '__main__':
-    filename = "data/whereabouts.tsv"
-    whereabouts = Whereabouts().load(filename)
-    days = whereabouts.day_place
-    for day in sorted(days):
-        print day, whereabouts.places(day)
+    def load(self, filename):
+        return self.parse_tsv(open(filename).read())

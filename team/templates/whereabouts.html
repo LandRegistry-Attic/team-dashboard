@@ -4,6 +4,7 @@
   <link rel="stylesheet" href="/static/whereabouts.css">
 </head>
 <body>
+  <h1>Team whereabouts for {{ date }}</h1>
   <table>
     <tr>
   {% for place in places %}
@@ -15,7 +16,7 @@
     <td>
     {% for name in people %}
         <div id="card_{{ members[name].photo }}" class="card">
-          <img src="photos/{{ members[name].photo }}.jpg">
+          <img src="/photos/{{ members[name].photo }}.jpg">
           <h2>{{ name|first_name}}</h2>
         </div>
     {% endfor %}

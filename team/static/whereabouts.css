@@ -8,17 +8,30 @@ html {
   font-family: "Helvetica Neue", sans-serif;
 }
 
+h1 {
+  width: 100%;
+  background-color: #111;
+  color: white;
+  text-align: center;
+  font-weight: normal;
+  font-size: 18px;
+  text-transform: uppercase;
+  padding-top: 10px;
+}
+
 table {
   border: none;
   width: 100%;
 }
+
 th {
   text-align: left;
-  background-color: black;
+  background-color: #111;
   color: white;
   text-transform: uppercase;
   padding: 10px;
   font-weight: normal;
+  font-size: 18px;
 }
 
 td {
@@ -38,6 +51,6 @@ td {
 }
 
 .card h2 {
-  font-size:13px;
+  font-size: 13px;
   font-weight: normal;
 }
