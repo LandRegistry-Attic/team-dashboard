@@ -9,7 +9,7 @@ deploy:
   provider: heroku
   buildpack: python
   api_key:
-    secure: SVOkDnBfcAr/Ok+LhW5msYsLD6cSYe+3C4x3A2Wjr8vhJQ1HW17P+fffWlP28LWuTYodrOJleAQ9B0upOypb5PvbfxHh1lEDO+OK1eZbhhp3JO08seDrYd1kv5e9chsXMD0hfxsZUL54czvy+Yb6V5cFOdMu/d2uXutndg+ohh4=
+    secure: SBuGrBeAZZvIiY7/WM7lgS9L/A6d27IXcuPFfBzcpgAPTbBFSNOLuj9abQzjEyvCBVjB7TVkXpaEI6NpSF7rLxFMREpWHVNArC3mtPTDf8mRd68jrGKe1FAj+U5GlQbUGIYgSr4F9UHwNX16ru26hJalP7vqAKPNjdGSbHCIR2A=
   strategy: git
   app: lr-team-dashboard
   on:
