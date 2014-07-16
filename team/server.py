@@ -1,5 +1,4 @@
 import time
-import os
 
 from flask import render_template, send_file
 from flask import request, Response
@@ -8,8 +7,8 @@ from team import app
 from members import Members
 from whereabouts import Whereabouts
 
-team = Members().load(os.environ.get('TEAM_TSV_URL'))
-whereabouts = Whereabouts().load(os.environ.get('WHEREABOUTS_TSV_URL'))
+team = Members().load(app.config['TEAM_TSV_URL'])
+whereabouts = Whereabouts().load(app.config['WHEREABOUTS_TSV_URL'])
 
 @app.route('/')
 def home():
