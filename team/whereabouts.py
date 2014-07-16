@@ -3,6 +3,7 @@ import csv
 import re
 from collections import defaultdict
 import urllib2
+from team import app
 
 re_date = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 
@@ -33,6 +34,7 @@ class Whereabouts:
         next(lines)
         r = csv.DictReader(lines, delimiter='\t')
         for row in r:
+            print "3ROW ", row
             for key in row:
                 self.add(key.strip(), row['name'], row[key])
         return self

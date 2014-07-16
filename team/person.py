@@ -5,7 +5,6 @@ import csv
 class Person(object):
     name = ""
     photo = ""
-    photo_url = ""
     slack = ""
     twitter = ""
     github = ""
@@ -25,3 +24,17 @@ class Person(object):
                 setattr(self, key, dictionary[key])
         for key in kwargs:
             setattr(self, key, kwargs[key])
+
+    def lazyprop(fn):
+        attr_name = '_lazy_' + fn.__name__
+        @property
+        def _lazyprop(self):
+            if not hasattr(self, attr_name):
+                setattr(self, attr_name, fn(self))
+            return getattr(self, attr_name)
+        return _lazyprop
+
+    @lazyprop
+    def photo_embed(self):
+        return "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAUAAAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO9TXL0Y4OHwAAAABJRU5ErkJggg=="
+

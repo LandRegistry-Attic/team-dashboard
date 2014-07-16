@@ -49,5 +49,3 @@ def _whereabouts_today():
 def _whereabouts(date):
     places = whereabouts.places(date)
     return render_template('whereabouts.html', date=date, members=team.members, places=places)
-
-
