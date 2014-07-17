@@ -2,14 +2,17 @@
 <html>
 <head>
   <link rel="stylesheet" href="/static/card.css">
+  <style>{% for name in members %}
+  #{{ members[name].photo }} .photo { background-image: url("{{ members[name].photo_url }}") }{% endfor %}
+  </style>
 </head>
 <body>
   {% for row in members | batch(4) %}
   <div class="page">
       {% for name in row %}
-    <div class="card">
+    <div class="card" id="{{ members[name].photo }}">
       <h2>{{ name }}</h2>
-      <img src="{{ members[name].photo_url }}">
+      <div class="photo"></div>
       <ul>
         <li class="title">{{ members[name].role }}</li>
       </ul>
