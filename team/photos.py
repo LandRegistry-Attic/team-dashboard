@@ -11,6 +11,9 @@ class Photos:
         if username:
             self.auth = (username, password)
 
+    def clear(self):
+        self.cache = {}
+
     def fetch(self, photo):
         headers = {}
         content_type = None
