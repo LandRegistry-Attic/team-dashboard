@@ -6,9 +6,7 @@ app = Flask(__name__)
 
 app.config.from_object(os.environ.get('SETTINGS'))
 
-if os.environ.get('BASIC_AUTH_USERNAME'):
-    app.config['BASIC_AUTH_USERNAME'] = os.environ['BASIC_AUTH_USERNAME']
-    app.config['BASIC_AUTH_PASSWORD'] = os.environ['BASIC_AUTH_PASSWORD']
+if app.config.get('BASIC_AUTH_USERNAME'):
     app.config['BASIC_AUTH_FORCE'] = True
     basic_auth = BasicAuth(app)
 
@@ -25,4 +23,3 @@ def first_name(string):
     return string.strip().split()[0]
 
 app.jinja_env.filters['first_name'] = first_name
-
