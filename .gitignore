@@ -2,3 +2,4 @@
 *.pyc
 static/build
 static/.webassets-cache
+tmp
