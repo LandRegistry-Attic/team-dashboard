@@ -2,10 +2,18 @@
 
 export PORT=5000
 
-if [[ $1 == "dev" ]]; then
+case "$1" in
+dev*)
     export SETTINGS='config.DevelopmentConfig'
-    python run_dev.py
-else
+    exec python run_dev.py
+    ;;
+
+test)
+    export SETTINGS='config.TestConfig'
+    exec py.test
+    ;;
+
+*)
     export SETTINGS='config.Config'
-    foreman start
-fi
+    exec foreman start
+esac
