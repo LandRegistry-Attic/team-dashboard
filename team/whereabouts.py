@@ -23,7 +23,7 @@ class Whereabouts:
 
     def add(self, day, name, place):
         if re_date.match(day) and place:
-            self.day_place[day][place].append(name)
+            self.day_place[day][place.lower()].append(name)
 
     def places(self, day):
         return self.day_place[day]

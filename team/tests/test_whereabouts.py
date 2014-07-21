@@ -11,11 +11,11 @@ Robert Roper	Holiday	Holiday	Holiday
 """)
 
     places = w.places('2014-07-14')
-    assert places['London'] == ['Theodore Ruoff']
-    assert places['Holiday'] == ['Robert Roper']
+    assert places['london'] == ['Theodore Ruoff']
+    assert places['holiday'] == ['Robert Roper']
 
     places = w.places('2014-07-16')
-    assert places['Holiday'] == ['Theodore Ruoff', 'Robert Roper']
+    assert places['holiday'] == ['Theodore Ruoff', 'Robert Roper']
 
 def test_trim():
     w = Whereabouts()
@@ -28,4 +28,4 @@ Rouxville Mark Lowe	                           London	      London
 """)
 
     places = w.places('2014-07-14')
-    assert places.keys() == ['London']
+    assert places.keys() == ['london']
