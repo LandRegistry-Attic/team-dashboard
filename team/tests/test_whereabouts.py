@@ -16,3 +16,16 @@ Robert Roper	Holiday	Holiday	Holiday
 
     places = w.places('2014-07-16')
     assert places['Holiday'] == ['Theodore Ruoff', 'Robert Roper']
+
+def test_trim():
+    w = Whereabouts()
+    w.parse_tsv(
+"""	Monday	Tuesday	Wednesday
+name	2014-07-14	2014-07-15
+Theodore Ruoff	 London	Glasgow
+Robert Roper	                     London	      London   
+Rouxville Mark Lowe	                           London	      London   
+""")
+
+    places = w.places('2014-07-14')
+    assert places.keys() == ['London']

@@ -34,7 +34,7 @@ class Whereabouts:
         r = csv.DictReader(lines, delimiter='\t')
         for row in r:
             for key in row:
-                self.add(key.strip(), row['name'], row[key])
+                self.add(key.strip(), row['name'], row[key].strip())
         return self
 
     def load(self, resource):
