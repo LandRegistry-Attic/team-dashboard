@@ -5,6 +5,8 @@ install:
 - pip install -r requirements.txt
 - pip install pytest
 script: ./run.sh test
+before_deploy:
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
 deploy:
   provider: heroku
   buildpack: python
