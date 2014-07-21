@@ -13,7 +13,13 @@ test)
     exec py.test
     ;;
 
-*)
-    export SETTINGS='config.Config'
+prod*)
+    export SETTINGS='config.ProductionConfig'
     exec foreman start
+    ;;
+
+*)
+    export SETTINGS='config.ProductionConfig'
+    exec python run_dev.py
+    ;;
 esac
