@@ -10,7 +10,7 @@ def test_get_photo_with_basic_authetication(mock_get):
     content, content_type = photos.get('theodore')
     mock_get.assert_called_with('http://example.com/theodore.jpg',
         headers={},
-        auth=('token', ''))
+        auth=('token', str('')))
 
 @mock.patch('requests.get')
 def test_get_photo_without_basic_authetication(mock_get):

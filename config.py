@@ -17,7 +17,7 @@ class ProductionConfig(Config):
     WHEREABOUTS_TSV_URL = os.environ.get('WHEREABOUTS_TSV_URL')
     PHOTO_URL = os.environ.get('PHOTO_URL')
     PHOTO_USERNAME = os.environ.get('PHOTO_USERNAME')
-    PHOTO_PASSWORD = os.environ.get('PHOTO_PASSWORD')
+    PHOTO_PASSWORD = os.getenv('PHOTO_PASSWORD', '')
 
 class DevelopmentConfig(Config):
     DEBUG = True

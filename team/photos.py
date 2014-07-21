@@ -21,6 +21,7 @@ class Photos:
             headers['Accept'] = 'application/vnd.github.VERSION.raw'
             content_type = 'image/jpeg'
 
+        print url, headers, self.auth
         r = requests.get(url, headers=headers, auth=self.auth)
 
         # TBD: should sniff content, ensure is actually an image
