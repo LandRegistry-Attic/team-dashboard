@@ -39,4 +39,4 @@ def _whereabouts(date):
 @app.route('/photo/<photo>')
 def _photo(photo):
     content, content_type = photos.get(photo)
-    return Response(content, content_type=content_type)
+    return Response(content, content_type=content_type, headers={'Cache-control': 'max-age=10800, public'})

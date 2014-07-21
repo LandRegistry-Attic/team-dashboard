@@ -4,6 +4,7 @@ import requests
 class Photos:
     template_url = None
     auth = None
+    cache = {}
 
     def __init__(self, template_url, username='', password=''):
         self.template_url = template_url
@@ -21,11 +22,16 @@ class Photos:
             headers['Accept'] = 'application/vnd.github.VERSION.raw'
             content_type = 'image/jpeg'
 
-        print url, headers, self.auth
         r = requests.get(url, headers=headers, auth=self.auth)
 
         # TBD: should sniff content, ensure is actually an image
-        return r.content, content_type or r.content_type
+        if content_type:
+            r.content_type = content_type
+
+        return r.content, r.content_type
 
     def get(self, photo):
-        return self.fetch(photo)
+        if not self.cache.has_key(photo):
+             self.cache[photo] = self.fetch(photo)
+
+        return self.cache[photo]

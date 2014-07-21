@@ -7,16 +7,16 @@
   <h1>Team whereabouts for {{ date }}</h1>
   <table>
     <tr>
-  {% for place in places %}
+  {% for place in places|sort %}
      <th>{{ place }}</th>
   {% endfor %}
     </tr>
     <tr>
-  {% for place, people in places.iteritems() %}
+  {% for place, people in places|dictsort %}
     <td>
-    {% for name in people %}
+    {% for name in people|sort %}
         <div id="card_{{ members[name].photo }}" class="card">
-          <img src="{{ members[name].photo_url }}">
+          <img src="{{ members[name].photo_url if members[name].photo_url else ('/photo/' + members[name].photo) }}">
           <h2>{{ name|first_name}}</h2>
         </div>
     {% endfor %}
