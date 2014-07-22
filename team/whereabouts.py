@@ -5,6 +5,7 @@ from collections import defaultdict
 import urllib2
 
 re_date = re.compile(r'^\d{4}-\d{2}-\d{2}$')
+re_holiday = re.compile(r'^(not working|leave|annual leave|away|hoilday)$')
 
 class DayPlace(dict):
     def __getitem__(self, item):
@@ -22,7 +23,13 @@ class Whereabouts:
         self.day_place = DayPlace()
 
     def add(self, day, name, place):
-        if re_date.match(day) and place:
+        if not place:
+            return
+
+        if re_holiday.match(place):
+            place = "not working"
+
+        if re_date.match(day):
             self.day_place[day][place.lower()].append(name)
 
     def places(self, day):
