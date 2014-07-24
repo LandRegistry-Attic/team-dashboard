@@ -2,7 +2,7 @@ import os
 import csv
 import re
 from collections import defaultdict
-import urllib2
+import requests
 
 re_date = re.compile(r'^\d{4}-\d{2}-\d{2}$')
 re_holiday = re.compile(r'^(not working|leave|annual leave|away|hoilday)$')
@@ -16,8 +16,13 @@ class DayPlace(dict):
             return value
 
 class Whereabouts:
-    def __init__(self):
+    day_place = {}
+
+    def __init__(self, url=''):
         self.reset()
+        if (url):
+            self.url = url
+            self.load(url)
 
     def reset(self):
         self.day_place = DayPlace()
@@ -44,10 +49,12 @@ class Whereabouts:
                 self.add(key.strip(), row['name'], row[key].strip())
         return self
 
-    def load(self, resource):
+    def load(self, resource=''):
+        if not resource:
+            resource = self.url
+
         if (resource.startswith('http')):
-            response = urllib2.urlopen(resource)
-            tsv = response.read()
+            tsv = requests.get(resource)
             return self.parse_tsv(tsv)
         else:
             return self.parse_tsv(open(resource).read())

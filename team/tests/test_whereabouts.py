@@ -1,14 +1,17 @@
 import pytest
+import mock
+import requests
 from team.whereabouts import Whereabouts
 
-def test_init_from_args():
-    w = Whereabouts()
-    w.parse_tsv(
-"""	Monday	Tuesday	Wednesday
+data = """	Monday	Tuesday	Wednesday
 name	2014-07-14	2014-07-15	2014-07-16
 Theodore Ruoff	London	Glasgow	Holiday
 Robert Roper	Holiday	Holiday	Holiday
-""")
+"""
+
+def test_init_from_args():
+    w = Whereabouts()
+    w.parse_tsv(data)
 
     places = w.places('2014-07-14')
     assert places['london'] == ['Theodore Ruoff']
@@ -19,8 +22,7 @@ Robert Roper	Holiday	Holiday	Holiday
 
 def test_trim():
     w = Whereabouts()
-    w.parse_tsv(
-"""	Monday	Tuesday	Wednesday
+    w.parse_tsv("""
 name	2014-07-14	2014-07-15
 Theodore Ruoff	 London	Glasgow
 Robert Roper	                     London	      London   
@@ -35,8 +37,7 @@ Rouxville Mark Lowe	                           London	      London
 
 def test_order():
     w = Whereabouts()
-    w.parse_tsv(
-"""	Monday	Tuesday	Wednesday
+    w.parse_tsv("""
 name	2014-07-14
 A	England
 B	Working from home
@@ -45,3 +46,10 @@ D	Conference
 """)
 
     assert sorted(w.places('2014-07-14').keys()) == ['conference', 'england', 'working from home', 'zoo']
+
+@mock.patch('requests.get', return_value=data)
+def test_init_from_url(mock_get):
+    url = 'http://example.com/file.tsv'
+    w = Whereabouts(url)
+    assert w.url == url
+    mock_get.assert_called_with(url)

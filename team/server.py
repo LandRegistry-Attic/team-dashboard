@@ -11,7 +11,7 @@ from photos import Photos
 
 team = Members().load(app.config['TEAM_TSV_URL'])
 
-whereabouts = Whereabouts().load(app.config['WHEREABOUTS_TSV_URL'])
+whereabouts = Whereabouts(app.config['WHEREABOUTS_TSV_URL'])
 
 photos = Photos(app.config['PHOTO_URL'],
     username=app.config.get('PHOTO_USERNAME', ''),
