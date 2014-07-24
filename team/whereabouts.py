@@ -17,6 +17,7 @@ class DayPlace(dict):
 
 class Whereabouts:
     day_place = {}
+    url = ''
 
     def __init__(self, url=''):
         self.reset()

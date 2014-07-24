@@ -4,8 +4,8 @@ class Config(object):
     DEBUG = False
     BASIC_AUTH_USERNAME = ''
     BASIC_AUTH_PASSWORD = ''
-    TEAM_TSV_URL = 'team/data/team.tsv'
-    WHEREABOUTS_TSV_URL = 'team/data/whereabouts.tsv'
+    TEAM_TSV_URL = 'data/team.tsv'
+    WHEREABOUTS_TSV_URL = 'data/whereabouts.tsv'
     PHOTO_URL = ''
     PHOTO_USERNAME = ''
     PHOTO_PASSWORD = ''
