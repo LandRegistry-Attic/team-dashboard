@@ -10,7 +10,7 @@ dev*)
 
 test)
     export SETTINGS='config.TestConfig'
-    exec py.test
+    exec py.test --cov team tests/ --cov-report=term --cov-report=html
     ;;
 
 prod*)

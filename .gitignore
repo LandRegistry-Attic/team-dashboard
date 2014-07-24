@@ -3,3 +3,5 @@
 static/build
 static/.webassets-cache
 tmp
+.coverage
+htmlcov
