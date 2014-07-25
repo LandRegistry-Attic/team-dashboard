@@ -55,7 +55,7 @@ class Whereabouts:
             resource = self.url
 
         if (resource.startswith('http')):
-            tsv = requests.get(resource)
-            return self.parse_tsv(tsv)
+            r = requests.get(resource)
+            return self.parse_tsv(r.text)
         else:
             return self.parse_tsv(open(resource).read())
