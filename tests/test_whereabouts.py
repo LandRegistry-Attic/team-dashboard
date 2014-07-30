@@ -5,8 +5,8 @@ from team.whereabouts import Whereabouts
 
 data = """	Monday	Tuesday	Wednesday
 name	2014-07-14	2014-07-15	2014-07-16
-Theodore Ruoff	London	Glasgow	Holiday
-Robert Roper	Holiday	Holiday	Holiday
+Theodore Ruoff	London	Glasgow	Croydon
+Robert Roper	Croydon	Croydon	Croydon
 """
 
 data_response = Response
@@ -18,11 +18,11 @@ def test_init_from_args():
     w.parse_tsv(data)
 
     places = w.places('2014-07-14')
-    assert places['london'] == ['Theodore Ruoff']
-    assert places['holiday'] == ['Robert Roper']
+    assert places['London'] == ['Theodore Ruoff']
+    assert places['Croydon'] == ['Robert Roper']
 
     places = w.places('2014-07-16')
-    assert places['holiday'] == ['Theodore Ruoff', 'Robert Roper']
+    assert places['Croydon'] == ['Theodore Ruoff', 'Robert Roper']
 
 def test_trim():
     w = Whereabouts()
@@ -34,10 +34,10 @@ Rouxville Mark Lowe	                           London	      London
 """)
 
     places = w.places('2014-07-14')
-    assert places.keys() == ['london']
+    assert places.keys() == ['London']
 
     places = w.places('2014-07-15')
-    assert sorted(places.keys()) == ['glasgow', 'london']
+    assert sorted(places.keys()) == ['Glasgow', 'London']
 
 def test_order():
     w = Whereabouts()
@@ -49,7 +49,7 @@ C	Zoo
 D	Conference
 """)
 
-    assert sorted(w.places('2014-07-14').keys()) == ['conference', 'england', 'working from home', 'zoo']
+    assert sorted(w.places('2014-07-14').keys()) == ['Conference', 'England', 'Working from home', 'Zoo']
 
 @mock.patch('requests.get', return_value=data_response)
 def test_init_from_url(mock_get):
@@ -60,4 +60,19 @@ def test_init_from_url(mock_get):
     mock_get.assert_called_with(url)
 
     places = w.places('2014-07-14')
-    assert places['london'] == ['Theodore Ruoff']
+    assert places['London'] == ['Theodore Ruoff']
+
+def test_not_working():
+    w = Whereabouts()
+    w.parse_tsv("""
+name	2014-07-14
+A	Not working
+B	HOLIDAY
+C	Holiday
+D	Leave
+E	AWAY
+F	Annual leave
+""")
+
+    assert sorted(w.places('2014-07-14').keys()) == ['Not working']
+
