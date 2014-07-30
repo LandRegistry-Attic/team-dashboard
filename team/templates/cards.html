@@ -3,7 +3,7 @@
 <head>
   <link rel="stylesheet" href="/static/card.css">
   <style>{% for name in members %}
-  #{{ members[name].photo }} .photo { background-image: url("{{ members[name].photo_url }}") }{% endfor %}
+  #{{ members[name].photo }} .photo { background-image: url("{{ members[name].photo_url if members[name].photo_url else ('/photo/' + members[name].photo) }}"); } {% endfor %}
   </style>
 </head>
 <body>
